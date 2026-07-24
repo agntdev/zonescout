@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Explain entry",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Request detailed rationale for trade entry point"
+            }
+          }
+        ],
+        "send": {
+          "callback": "report:explain_entry"
+        }
+      }
+    ]
+  }
+]
