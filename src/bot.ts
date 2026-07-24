@@ -6,7 +6,9 @@ import type { StorageAdapter } from "grammy";
 // bot grows. Durable domain data must NOT live here — use the toolkit's
 // persistent storage (see AGENTS.md).
 export interface Session {
-  // example: step?: "awaiting_amount";
+  /** The current user's private analysis state. The toolkit persists this with
+   * its configured Redis/Durable-Object adapter in production. */
+  analysis?: import("./analysis.js").AnalysisState;
 }
 
 export type Ctx = BotContext<Session>;

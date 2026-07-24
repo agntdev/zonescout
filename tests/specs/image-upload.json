@@ -1,19 +1,31 @@
 [
   {
-    "name": "Send chart image",
+    "name": "A chart image with real levels produces a 2:1 report",
     "steps": [
       {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Trigger analysis by uploading an MT5 chart screenshot"
+        "send": {
+          "update": {
+            "update_id": 1,
+            "message": {
+              "message_id": 1,
+              "date": 0,
+              "chat": { "id": 1, "type": "private", "first_name": "Test" },
+              "from": { "id": 1, "is_bot": false, "first_name": "Test" },
+              "caption": "long entry=1.0840 stop=1.0800 supply=1.0920 demand=1.0800",
+              "photo": [{ "file_id": "chart-file", "file_unique_id": "chart-unique", "width": 1200, "height": 800, "file_size": 1000 }]
             }
           }
-        ],
-        "send": {
-          "text": "/image_upload"
-        }
+        },
+        "expect": [{ "method": "sendPhoto", "payload": { "caption": "Chart analysis\n\nTrade setup: LONG\nTop-down view: H4 → H1 → M15 → M5.\nSupplied levels: supply 1.092; demand 1.08.\nEntry 1.084; stop 1.080.\nTP1 1.088; TP2 1.092.\nRisk 0.004; target 0.008 (2:1)." } }]
+      }
+    ]
+  },
+  {
+    "name": "A low-resolution image is rejected clearly",
+    "steps": [
+      {
+        "send": { "update": { "update_id": 2, "message": { "message_id": 2, "date": 0, "chat": { "id": 1, "type": "private", "first_name": "Test" }, "from": { "id": 1, "is_bot": false, "first_name": "Test" }, "photo": [{ "file_id": "small-chart", "file_unique_id": "small", "width": 640, "height": 400, "file_size": 1000 }] } } },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "This chart is too small to review accurately. Send a clearer screenshot at least 800 × 500 pixels." } }]
       }
     ]
   }
