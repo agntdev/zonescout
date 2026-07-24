@@ -7,13 +7,26 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Request alternative stop-loss placement options"
+              "text": "No trade setup is available yet — send an MT5 chart with entry and stop levels."
             }
           }
         ],
         "send": {
           "callback": "report:alternate_stop"
         }
+      }
+    ]
+  },
+  {
+    "name": "Alternate stop uses the existing trade risk",
+    "steps": [
+      {
+        "send": { "update": { "update_id": 4, "message": { "message_id": 4, "date": 0, "chat": { "id": 1, "type": "private", "first_name": "Test" }, "from": { "id": 1, "is_bot": false, "first_name": "Test" }, "caption": "long entry=100 stop=95", "photo": [{ "file_id": "chart-stop", "file_unique_id": "stop", "width": 1200, "height": 800, "file_size": 1000 }] } } },
+        "expect": [{ "method": "sendPhoto" }]
+      },
+      {
+        "send": { "callback": "report:alternate_stop" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "Alternate stop: 92.50. Risk becomes 7.50; a 2:1 TP2 becomes 115.00. Use it only if the wider invalidation level is valid on your chart." } }]
       }
     ]
   }

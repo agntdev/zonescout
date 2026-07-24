@@ -5,15 +5,24 @@
       {
         "expect": [
           {
-            "method": "sendMessage",
+              "method": "editMessageText",
             "payload": {
-              "text": "Adjust timeframes for top-down analysis"
+              "text": "Choose a supported top-down timeframe set."
             }
           }
         ],
         "send": {
           "callback": "analysis:change_timeframes"
         }
+      }
+    ]
+  },
+  {
+    "name": "A timeframe can be selected before a chart is sent",
+    "steps": [
+      {
+        "send": { "callback": "analysis:frames:intraday" },
+        "expect": [{ "method": "editMessageText", "payload": { "text": "Timeframes saved. Send an MT5 chart with entry and stop levels to run the analysis." } }]
       }
     ]
   }

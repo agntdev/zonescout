@@ -7,13 +7,26 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Request detailed rationale for trade entry point"
+              "text": "No chart analysis is available yet — send an MT5 chart to create one."
             }
           }
         ],
         "send": {
           "callback": "report:explain_entry"
         }
+      }
+    ]
+  },
+  {
+    "name": "Explain entry expands an existing report",
+    "steps": [
+      {
+        "send": { "update": { "update_id": 3, "message": { "message_id": 3, "date": 0, "chat": { "id": 1, "type": "private", "first_name": "Test" }, "from": { "id": 1, "is_bot": false, "first_name": "Test" }, "caption": "short entry=2000 stop=2010", "photo": [{ "file_id": "chart-entry", "file_unique_id": "entry", "width": 1200, "height": 800, "file_size": 1000 }] } } },
+        "expect": [{ "method": "sendPhoto" }]
+      },
+      {
+        "send": { "callback": "report:explain_entry" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "Entry rationale: enter only after price confirms below your supplied entry level. The stop defines the invalidation point, and TP2 remains exactly twice that risk. Confidence is confirmed only for the levels you supplied; the chart itself is not used to invent levels." } }]
       }
     ]
   }

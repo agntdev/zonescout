@@ -1,0 +1,15 @@
+[
+  {
+    "name": "The owner can set report retention",
+    "steps": [
+      {
+        "send": { "callback": "history:settings" },
+        "expect": [{ "method": "editMessageText", "payload": { "text": "You currently keep 100 reports. Choose a history limit." } }]
+      },
+      {
+        "send": { "callback": "history:set:25" },
+        "expect": [{ "method": "editMessageText", "payload": { "text": "History limit set to 25 reports." } }]
+      }
+    ]
+  }
+]
