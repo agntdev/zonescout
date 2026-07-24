@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Show alternate stop",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Request alternative stop-loss placement options"
+            }
+          }
+        ],
+        "send": {
+          "callback": "report:alternate_stop"
+        }
+      }
+    ]
+  }
+]
